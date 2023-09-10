@@ -18,3 +18,7 @@ after successful installation
 run `npm start` to start the application
 
 Note: you should have the backend running before trying to do any activities on the frontend.
+
+Run tests for the backend in Visual studio or using `dotnet cli`
+
+Run tests for the frontend using `npm test`
