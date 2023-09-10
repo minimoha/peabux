@@ -24,34 +24,11 @@ namespace PeabuxAssessment
             services.AddTransient<IStudentService, StudentService>();
             services.AddSwaggerGen();
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: "*",
-            //                      builder =>
-            //                      {
-            //                          builder.WithOrigins("http://locahost:3000", "*")
-            //                          .AllowAnyMethod()
-            //                          .AllowAnyHeader();
-            //                      });
-            //});
-
-            //var MyAllowSpecificOrigins = "MyAllowSpecificOrigins";
-
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyAllowSpecificOrigins,
-            //                      policy =>
-            //                      {
-            //                          policy.WithOrigins("http://example.com",
-            //                                              "http://www.contoso.com", "http://localhost:3000", "http://localhost:3000");
-            //                      });
-            //});
-
             services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>
                 {
-                    builder.WithOrigins().AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true) // allow any origin
+                    builder.WithOrigins().AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true)
                    .AllowCredentials().Build();
                 });
             });
@@ -67,10 +44,10 @@ namespace PeabuxAssessment
             app.UseHttpsRedirection();
 
             app.UseCors(builder =>
- builder.WithOrigins("http://localhost:3000")
- .AllowAnyHeader()
- .AllowCredentials()
- .AllowAnyMethod());
+                builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowCredentials()
+                .AllowAnyMethod());
 
             app.UseAuthorization();
 

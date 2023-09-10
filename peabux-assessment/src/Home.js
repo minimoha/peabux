@@ -13,9 +13,7 @@ function Home() {
             &nbsp; &nbsp; &nbsp; &nbsp;
             <Link to='/student/read'>
             <button className='view-button'>View Students</button>
-            </Link>
-
-      
+            </Link>     
     </div>
   );
 }

@@ -24,7 +24,7 @@ namespace PeabuxAssessment.Controllers
             return BadRequest(response);
         }
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult> GetAll()
         {
             var response = await _service.GetAllStudents();
             if (response.Successful)

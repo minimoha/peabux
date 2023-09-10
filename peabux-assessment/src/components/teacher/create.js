@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 
@@ -83,7 +82,11 @@ export default function Create() {
             return
         }
 
-        axios.post(`https://localhost:7051/api/Teacher/Create`, {
+        fetch(`https://localhost:7051/api/Teacher/Create`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }, body: JSON.stringify({
             nationalIDNumber,
             title,
             name,
@@ -91,10 +94,10 @@ export default function Create() {
             dateOfBirth,
             teacherNumber,
             salary
-        }).then(() => {
+        })}).then(() => {
             navigate('/teacher/read')
         }).catch((err) =>{
-console.log(err)
+            console.log(err)
         })
     }
 
@@ -110,8 +113,9 @@ console.log(err)
         <div className='form-field'>
             <Form className="create-form">
                 <Form.Field>
-                    <label>National ID Number</label>
-                    <input placeholder='National ID Number' onChange={(e) => setNationalIDNumber(e.target.value)} required/>
+                    {/* <label>National ID Number</label>
+                    <input placeholder='National ID Number' onChange={(e) => setNationalIDNumber(e.target.value)} required/> */}
+                    <Form.Input required={true} onChange={(e) => setNationalIDNumber(e.target.value)} label='National ID Number' placeholder="National ID Number"/>
                 </Form.Field>
                 <Form.Select
                     fluid
@@ -122,30 +126,35 @@ console.log(err)
                     required
                 />
                 <Form.Field>
-                    <label>Name</label>
-                    <input placeholder='Name' onChange={(e) => setName(e.target.value)} required/>
+                    {/* <label>Name</label>
+                    <input placeholder='Name' onChange={(e) => setName(e.target.value)} required/> */}
+                    <Form.Input required={true} onChange={(e) => setName(e.target.value)} label='Name' placeholder="Name"/>
                 </Form.Field>
                 <Form.Field>
-                    <label>Surname</label>
-                    <input placeholder='Surname' onChange={(e) => setSurname(e.target.value)} required/>
+                    {/* <label>Surname</label>
+                    <input placeholder='Surname' onChange={(e) => setSurname(e.target.value)} required/> */}
+                    <Form.Input required={true} onChange={(e) => setSurname(e.target.value)} label='Surname' placeholder="Surname"/>
                 </Form.Field>
                 <Form.Field>
-                    <label>dateOfBirth</label>
-                    <input placeholder='Date Of Birth' type='date' id='dob' onBlur={validateDate} required/>
+                    {/* <label>dateOfBirth</label>
+                    <input placeholder='Date Of Birth' type='date' id='dob' onBlur={validateDate} required/> */}
+                    <Form.Input required={true} type='date' id='dob' onBlur={validateDate} label='Date Of Birth' placeholder="Date Of Birth"/>
                 </Form.Field>
                 <Form.Field>
-                    <label>Teacher Number</label>
-                    <input placeholder='Teacher Number' type='number' onChange={(e) => setTeacherNumber(e.target.value)} required/>
+                    {/* <label>Teacher Number</label>
+                    <input placeholder='Teacher Number' type='number' onChange={(e) => setTeacherNumber(e.target.value)} required/> */}
+                    <Form.Input required={true} type='number' onChange={(e) => setTeacherNumber(e.target.value)} label='Teacher Number' placeholder="Teacher Number"/>
                 </Form.Field>
                 <Form.Field>
-                    <label>Salary</label>
-                    <input placeholder='Salary' type='number' onChange={(e) => setSalary(e.target.value)} />
+                    <label htmlFor='salary'>Salary</label>
+                    <input placeholder='Salary' id='salary' type='number' onChange={(e) => setSalary(e.target.value)} />
                 </Form.Field>
                 <Button onClick={postData} type='submit'>Submit</Button>
             </Form>
             <br/>
             <Link to='/'> Home </Link>
-            <Link to='/teacher/read'> Back to List </Link>
+            &nbsp; &nbsp;
+            <Link to='/teacher/read'> <button> Back to List </button> </Link>
 
         </div>
     )

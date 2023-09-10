@@ -1,30 +1,30 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import {  FetchData, DeleteData } from '../../utils/services'
 
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/Teacher/GetAll`)
-            .then((response) => {
-                setAPIData(response.data.data);
-            })
+        FetchData().then((data) => {
+            //console.log(data)
+            setAPIData(data);
+
+          })
     }, []);
 
     const getData = () => {
-        axios.get(`https://localhost:7051/api/Teacher/GetAll`)
-            .then((getData) => {
-                setAPIData(getData.data.data);
-            })
+        FetchData().then((data) => {
+            //console.log(data)
+            setAPIData(data);
+
+          })
     }
 
     const onDelete = (id) => {
-        axios.delete(`https://localhost:7051/api/Teacher/${id}`)
+        DeleteData(id)
         .then(() => {
             getData();
-        }).catch((err) => {
-            console.log(err)
         })
     }
 

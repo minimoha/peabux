@@ -1,26 +1,26 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import {  FetchStudentData, DeleteStudentData } from '../../utils/services'
+
 
 export default function ViewStudents() {
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/Student/GetAll`)
-            .then((response) => {
-                setAPIData(response.data.data);
-            })
+        FetchStudentData().then((data) => {
+                setAPIData(data);
+
+              })
     }, []);
 
     const getData = () => {
-        axios.get(`https://localhost:7051/api/Student/GetAll`)
-            .then((getData) => {
-                setAPIData(getData.data.data);
-            })
+        FetchStudentData().then((data) => {
+            setAPIData(data);
+          })
     }
 
     const onDelete = (id) => {
-        axios.delete(`https://localhost:7051/api/Student/${id}`)
+        DeleteStudentData(id)
         .then(() => {
             getData();
         })

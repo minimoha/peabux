@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 
@@ -60,13 +59,17 @@ export default function CreateStudent() {
             return
         }
 
-        axios.post(`https://localhost:7051/api/Student/Create`, {
+        fetch(`https://localhost:7051/api/Student/Create`,{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }, body: JSON.stringify({
             nationalIDNumber,
             name,
             surname,
             dateOfBirth,
             studentNumber,
-        }).then(() => {
+        })}).then(() => {
             navigate('/student/read')
         }).catch((err) =>{
 
@@ -81,8 +84,8 @@ export default function CreateStudent() {
                     <input placeholder='National ID Number' onChange={(e) => setNationalIDNumber(e.target.value)} required/>
                 </Form.Field>
                 <Form.Field>
-                    <label>Name</label>
-                    <input placeholder='Name' onChange={(e) => setName(e.target.value)} required/>
+                    <label htmlFor='name'>Name</label>
+                    <input placeholder='Name' id='name' onChange={(e) => setName(e.target.value)} required/>
                 </Form.Field>
                 <Form.Field>
                     <label>Surname</label>
@@ -100,7 +103,8 @@ export default function CreateStudent() {
             </Form>
             <br/>
             <Link to='/'> Home </Link>
-            <Link to='/student/read'> Back to List </Link>
+            &nbsp; &nbsp;
+            <Link to='/student/read'> <button> Back to List </button> </Link>
 
         </div>
     )
