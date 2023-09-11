@@ -13,9 +13,11 @@ To run the frontend, open the peabux-assessment in VS Code or any code editor of
 
 run `npm install`
 
-after successful installation
+after successful installation, Kindly create a `.env` file in your root folder.
 
-run `npm start` to start the application
+Create a variable named **REACT_APP_API_URL** and assign your backend base url to it (without the ending forward slash '/').
+
+Use `npm start` to start the application
 
 Note: you should have the backend running before trying to do any activities on the frontend.
 
